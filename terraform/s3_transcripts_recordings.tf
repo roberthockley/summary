@@ -1,10 +1,10 @@
-resource "aws_s3_bucket" "transcripts" {
-  bucket = "${var.project.tla}-recordings-transcripts"
-}
+#resource "aws_s3_bucket" "transcripts" {
+#  bucket = "${var.project.tla}-recordings-transcripts"
+#}
 
 resource "aws_s3_bucket_notification" "bucket_notification_transcribe" {
   depends_on = [aws_lambda_permission.allow_s3_to_invoke_lambda_transcribe]
-  bucket = aws_s3_bucket.transcripts.id
+  bucket = "arn:aws:s3:::song-recordings-transcripts"#aws_s3_bucket.transcripts.id
 
   lambda_function {
     lambda_function_arn = aws_lambda_function.lambda_transcribe.arn
